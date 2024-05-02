@@ -1,6 +1,7 @@
 package org.acme.entity;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "student")
-public class Student implements Serializable
-{
+public class Student implements Serializable {
 
     @Id
     @GeneratedValue
@@ -26,18 +26,55 @@ public class Student implements Serializable
 
     @Column(name = "is_deleted")
     private boolean isDeleted;
-   
+
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<StudentDetail> studentDetail = new ArrayList<>();
+    private List<StudentAddress> addresses = new ArrayList<>();
 
-   
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    private List<Course> courses = new ArrayList<>();
 
-    public List<StudentDetail> getStudentDetail() {
-        return studentDetail;
+    private String placeOfBirth;
+    private LocalDate dateOfBirth;
+    private String hobbies;
+
+    public String getPlaceOfBirth() {
+        return placeOfBirth;
     }
 
-    public void setStudentDetail(List<StudentDetail> studentDetail) {
-        this.studentDetail = studentDetail;
+    public void setPlaceOfBirth(String placeOfBirth) {
+        this.placeOfBirth = placeOfBirth;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getHobbies() {
+        return hobbies;
+    }
+
+    public void setHobbies(String hobbies) {
+        this.hobbies = hobbies;
+    }
+
+    public List<StudentAddress> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<StudentAddress> addresses) {
+        this.addresses = addresses;
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourse(List<Course> courses) {
+        this.courses = courses;
     }
 
     public Long getId() {
