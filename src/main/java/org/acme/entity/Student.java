@@ -31,7 +31,7 @@ public class Student implements Serializable {
     private List<StudentAddress> addresses = new ArrayList<>();
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<Course> courses = new ArrayList<>();
+    private List<StudentCourse> courses = new ArrayList<>();
 
     private String placeOfBirth;
     private LocalDate dateOfBirth;
@@ -69,11 +69,11 @@ public class Student implements Serializable {
         this.addresses = addresses;
     }
 
-    public List<Course> getCourses() {
+    public List<StudentCourse> getCourses() {
         return courses;
     }
 
-    public void setCourse(List<Course> courses) {
+    public void setCourse(List<StudentCourse> courses) {
         this.courses = courses;
     }
 

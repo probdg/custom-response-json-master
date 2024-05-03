@@ -1,40 +1,27 @@
 package org.acme.entity;
 
-import java.util.ArrayList;
-
-import java.util.List;
-
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "student_course")
-public class Course {
+@Table(name = "course")
+public class Course extends PanacheEntityBase {
 
     @Id
     @GeneratedValue
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "student_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_student_course_student_id"))
-    private Student student;
     private String name;
+    private Boolean deleted;
 
-    @OneToMany(mappedBy = "course")
-    private List<Schedule> schedules = new ArrayList<>();
-
-    public List<Schedule> getSchedules() {
-        return schedules;
+    public Boolean getDeleted() {
+        return deleted;
     }
 
-    public void setSchedules(List<Schedule> schedules) {
-        this.schedules = schedules;
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 
     public String getName() {
@@ -51,14 +38,6 @@ public class Course {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Student getStudent() {
-        return student;
-    }
-
-    public void setStudent(Student student) {
-        this.student = student;
     }
 
 }
